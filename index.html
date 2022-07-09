@@ -4,9 +4,25 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta />
     <title>Document</title>
   </head>
   <body>
-    <script type="module" src="dist/index.js"></script>
+    <canvas></canvas>
+
+    <!--Please don't look at the code below here :)-->
+
+    <script>
+      if (typeof SharedArrayBuffer === "undefined") {
+        const dummyMemory = new WebAssembly.Memory({
+          initial: 0,
+          maximum: 0,
+          shared: true,
+        });
+        globalThis.SharedArrayBuffer = dummyMemory.buffer.constructor;
+      }
+      var Module = { canvas: document.querySelector("canvas") };
+    </script>
+    <script async type="text/javascript" src="dist/index"></script>
   </body>
 </html>
